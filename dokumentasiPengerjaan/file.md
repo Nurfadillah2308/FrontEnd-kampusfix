@@ -8,10 +8,10 @@ Proyek ini adalah sistem informasi berbasis web untuk melaporkan kerusakan fasil
 
 Proyek ini dikerjakan secara kolaboratif oleh 2 orang developer Front-End dengan pembagian komponen global dan halaman (*pages*) sebagai berikut:
 
-### 📋 Tugas FE 1
-#### 🧩 Components (Global)
+### Tugas FE 1
+#### Components (Global)
+- [ ] `AdminDrawer.jsx`: Menu samping (*sidebar*) khusus navigasi halaman admin.
 - [ ] `Navbar.jsx`: Navigasi atas untuk mahasiswa/tamu (Logo, Nama Web, Bantuan, Tombol Login).
-- [ ] `Footer.jsx`: Bagian bawah web (Hak cipta, kontak aduan, info medsos).
 - [ ] `LayoutMhs.jsx`: Pembungkus struktur halaman mahasiswa (`Navbar` + `Footer` + Konten).
 
 #### 📄 Pages (Halaman Utama)
@@ -24,8 +24,8 @@ Proyek ini dikerjakan secara kolaboratif oleh 2 orang developer Front-End dengan
 ---
 
 ### Tugas FE 2
-#### 🧩 Components (Global)
-- [ ] `AdminDrawer.jsx`: Menu samping (*sidebar*) khusus navigasi halaman admin.
+#### Components (Global)
+- [ ] `Footer.jsx`: Bagian bawah web (Hak cipta, kontak aduan, info medsos).
 - [ ] `CardLaporan.jsx`: Kartu ringkasan satu laporan dengan badge status dinamis (🟡 Pending, 🔵 Proses, 🟢 Selesai, 🔴 Ditolak).
 - [ ] `Button.jsx`: Komponen tombol universal agar desain tombol di semua halaman konsisten.
 
