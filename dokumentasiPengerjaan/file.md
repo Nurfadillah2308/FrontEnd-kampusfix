@@ -10,9 +10,9 @@ Proyek ini dikerjakan secara kolaboratif oleh 2 orang developer Front-End dengan
 
 ### Tugas FE 1
 #### Components (Global)
-- [ ] `AdminDrawer.jsx`: Menu samping (*sidebar*) khusus navigasi halaman admin.
-- [ ] `Navbar.jsx`: Navigasi atas untuk mahasiswa/tamu (Logo, Nama Web, Bantuan, Tombol Login).
-- [ ] `LayoutMhs.jsx`: Pembungkus struktur halaman mahasiswa (`Navbar` + `Footer` + Konten).
+- [x] `AdminDrawer.jsx`: Menu samping (*sidebar*) khusus navigasi halaman admin.
+- [x] `Navbar.jsx`: Navigasi atas untuk mahasiswa/tamu (Logo, Nama Web, Bantuan, Tombol Login).
+- [x] `LayoutMhs.jsx`: Pembungkus struktur halaman mahasiswa (`Navbar` + `Footer` + Konten).
 
 #### 📄 Pages (Halaman Utama)
 - [ ] `LandingPage.jsx`: Tampilan awal web sebelum login (Informasi umum & statistik aduan).
