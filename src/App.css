@@ -55,10 +55,3 @@ body {
   font-weight: 600;
   color: #334155;
 }
-
-.content-container {
-  flex-grow: 1;
-  margin-left: 260px; /* <--- INI DIA */
-  padding: 40px;
-  box-sizing: border-box;
-}

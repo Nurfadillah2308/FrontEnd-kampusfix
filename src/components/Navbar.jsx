@@ -1,85 +1,67 @@
-import React, { useState } from 'react'; // 1. Kita panggil useState dari React
-import { ShieldAlert, Calendar } from 'lucide-react';
+import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ShieldAlert, LogOut } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
-  // 2. Buat state untuk melacak menu mana yang sedang aktif saat ini
-  // Default pertama kali adalah 'beranda'
-  const [activeMenu, setActiveMenu] = useState('beranda');
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
+  const navItems = [
+    { label: 'Beranda', to: '/beranda' },
+    { label: 'Riwayat', to: '/riwayat' },
+    { label: 'Bantuan', to: '/bantuan' },
+  ];
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
 
   return (
-    <nav className="w-full bg-white border-b border-[#eef2f5] sticky top-0 z-[100] px-6 py-3 font-sans">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        
-        {/* KIRI: Logo & Nama Web */}
-        <div className="flex items-center gap-2.5">
-          <div className="bg-[#2b5292] w-8 h-8 rounded-lg flex items-center justify-center text-white">
-            <ShieldAlert size={19} />
+    <nav className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/95 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#30578f] text-white">
+            <ShieldAlert size={18} />
           </div>
-          <span className="text-[20px] font-bold text-[#2b5292] tracking-tight">KampusFix</span>
-        </div>
+          <span className="text-lg font-semibold text-[#30578f]">KampusFix</span>
+        </Link>
 
-        {/* TENGAH: Menu Navigasi Dinamis */}
-        <div className="hidden md:flex items-center gap-9">
-          
-          {/* Tombol Beranda */}
-          <button 
-            onClick={() => setActiveMenu('beranda')}
-            className={`text-[14px] bg-transparent border-none py-1 relative cursor-pointer transition-colors duration-150 font-sans ${
-              activeMenu === 'beranda' 
-                ? "font-bold text-[#2b5292] after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#2b5292] after:bottom-[-20px] after:left-0" 
-                : 'font-medium text-[#64748b] hover:text-[#2b5292]'
-            }`}
-          >
-            Beranda
-          </button>
-
-          {/* Tombol Riwayat Laporan */}
-          <button 
-            onClick={() => setActiveMenu('riwayat')}
-            className={`text-[14px] bg-transparent border-none py-1 relative cursor-pointer transition-colors duration-150 font-sans ${
-              activeMenu === 'riwayat' 
-                ? "font-bold text-[#2b5292] after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#2b5292] after:bottom-[-20px] after:left-0" 
-                : 'font-medium text-[#64748b] hover:text-[#2b5292]'
-            }`}
-          >
-            Riwayat Laporan
-          </button>
-
-          {/* Tombol Bantuan */}
-          <button 
-            onClick={() => setActiveMenu('bantuan')}
-            className={`text-[14px] bg-transparent border-none py-1 relative cursor-pointer transition-colors duration-150 font-sans ${
-              activeMenu === 'bantuan' 
-                ? "font-bold text-[#2b5292] after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#2b5292] after:bottom-[-20px] after:left-0" 
-                : 'font-medium text-[#64748b] hover:text-[#2b5292]'
-            }`}
-          >
-            Bantuan
-          </button>
-
-        </div>
-
-        {/* KANAN: Tombol & Profil */}
-        <div className="flex items-center gap-5">
-          <button className="bg-[#2b5292] hover:bg-[#1e3a8a] text-white text-[12px] font-bold py-2.5 px-5 rounded-full flex items-center gap-2 transition-all shadow-sm cursor-pointer">
-            <span className="text-[16px]">+</span> LAPOR SEKARANG
-          </button>
-
-          <div className="flex items-center gap-4 text-[#64748b]">
-             <div className="bg-[#f8fafc] p-2 rounded-full cursor-pointer hover:bg-[#eff6ff] transition-colors">
-                <Calendar size={18} />
-             </div>
-             
-             <div className="flex items-center gap-2 cursor-pointer">
-                <img 
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=60" 
-                  alt="Profile" 
-                  className="w-9 h-9 rounded-full object-cover border-2 border-white shadow-sm"
+        <div className="hidden items-center gap-1 md:flex">
+          {navItems.map((item) => {
+            const isActive = location.pathname === item.to;
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 group ${
+                  isActive
+                    ? 'text-[#30578f]'
+                    : 'text-slate-600 hover:text-[#30578f] hover:bg-[#30578f]/5'
+                }`}
+              >
+                {item.label}
+                {/* Garis bawah aktif */}
+                <span
+                  className={`absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-[#30578f] transition-all duration-300 ${
+                    isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-40 group-hover:scale-x-100'
+                  }`}
                 />
-             </div>
-          </div>
+              </Link>
+            );
+          })}
         </div>
 
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 rounded-full border border-slate-200 px-3 py-2">
+            <span className="text-sm font-semibold text-slate-700">{user?.name?.split(' ')[0] || 'User'}</span>
+            <button onClick={handleLogout} className="text-slate-500 hover:text-rose-600 transition-colors">
+              <LogOut size={16} />
+            </button>
+          </div>
+        </div>
       </div>
     </nav>
   );
